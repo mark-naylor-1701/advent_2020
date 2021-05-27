@@ -23,10 +23,35 @@
             1877 1733 1588 1168 1828 1848 1963 1928 1920 1493 1968
             1564 1572])
 
-(defn solve
+(def sum (partial reduce +))
+
+(defn is2020? [coll]
+  (= 2020 (sum coll)))
+
+(defn pairs
+  "From given input sequence, create a set of pairs."
   [items]
-  (let [pairs (for [i items j items ] [i j])]
-    (->> pairs (map sort) (into #{}) (filter #(= 2020 (+ (first %) (second %)))) first (apply *))))
+  (for [i items j items] [i j]))
+
+(defn triples
+  "From given input sequence, create a set of triples."
+  [items]
+  (for [i items j items k items] [i j k]))
+
+(defn solve
+  [group-fn items]
+  (->> (group-fn items)
+       (map sort)
+       (into #{})
+       (filter is2020?)
+       first
+       (reduce *)))
+
+(def solve-pairs (partial solve pairs))
+(def solve-triples (partial solve triples))
+
+;; Pairs solution:   970816
+;; Triples solution: 96047280
 
 ;; ------------------------------------------------------------------------------
 ;; BSD 3-Clause License
