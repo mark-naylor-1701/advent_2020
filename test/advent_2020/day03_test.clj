@@ -31,3 +31,19 @@
   (testing
       "Row increase should be 1."
     (is (= 8 (row-inc 7)))))
+
+(deftest tree-test
+  "Test whether the indexed item is a tree."
+  (let [row-items (first test-data)]
+    (testing
+        "These should be trees."
+      (is (= true (tree? 2 row-items)))  ; first actual tree
+      (is (= true (tree? 3 row-items)))  ; second actual tree
+      (is (= true (tree? 13 row-items))) ; first wrap-around tree
+      )
+    (testing
+        "These should not be trees."
+      (is (= false (tree? 0 row-items)))  ; first open space
+      (is (= false (tree? 1 row-items)))  ; second open space
+      (is (= false (tree? 12 row-items)))) ; second wrap-around open space
+    ))

@@ -18,6 +18,7 @@
 
 (def right-amount 3)
 (def down-amount 1)
+(def tree-char \#)
 
 (defn columns
   "How many \"openings\" and \"trees\" are in a given row of the input
@@ -44,6 +45,11 @@
   "Slide right the appropriate amount."
   [n]
   (+ n down-amount))
+
+(defn tree?
+  "Is the row item at `n' a tree?"
+  [n row-items]
+  (= tree-char (get row-items (wrap-around n row-items))))
 
 ;; ------------------------------------------------------------------------------
 ;; BSD 3-Clause License
