@@ -1,11 +1,33 @@
 ;; author: Mark W. Naylor
 ;; file:  day02.clj
 ;; date:  2021-May-28
-(ns advent-2020.day02)
+(ns advent-2020.day02
+  (:require [clojure.string :refer [split]]))
 
 (def test-data ["1-3 a: abcde"
                 "1-3 b: cdefg"
                 "2-9 c: ccccccccc"])
+
+(defn valid?
+  "Is the password described by the structure a valid one?"
+  [pass-struct]
+  (->> (split (:password pass-struct) #"")
+       (filter #(= (first %) (:char pass-struct)))
+       (count)
+       (#(<= (:min pass-struct) % (:max pass-struct)))))
+
+(defn valid-count
+  "Number of valid passwords in the input lines."
+  [input]
+  (->> input (map line-parts) (map valid?) (filter identity) (count)))
+
+(defn line-parts
+  "Parse the line to pull out key elements"
+  [line]
+  (let [[a b c] (split line #" ")
+        [min max] (->> (split a #"-") (map #(Integer/parseInt %)))
+        char (first b)]
+    {:min min :max max :char char :password c}))
 
   ;; ------------------------------------------------------------------------------
   ;; BSD 3-Clause License
