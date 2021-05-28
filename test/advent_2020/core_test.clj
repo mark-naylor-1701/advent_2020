@@ -1,7 +1,9 @@
 (ns advent-2020.core-test
   (:require [clojure.test :refer :all]
-            [advent-2020.core :refer :all]))
+            [advent-2020.core :refer :all]
+            [clojure.string :refer [join]]))
 
-(deftest a-test
-  (testing "FIXME, I fail."
-    (is (= 0 1))))
+(deftest file-name-test
+  (testing
+      "join now working to build file spec."
+    (is (= (join "/" ["tasks" "day01.txt"]) "tasks/day01.txt"))))
