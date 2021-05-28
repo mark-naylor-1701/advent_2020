@@ -16,6 +16,35 @@
                 "#...##....#"
                 ".#..#...#.#"])
 
+(def right-amount 3)
+(def down-amount 1)
+
+(defn columns
+  "How many \"openings\" and \"trees\" are in a given row of the input
+  data. Assumes all the rows are the same size."
+  [input]
+  (-> input count))
+
+(defn rows
+  "How many rows are in the input data."
+  [input]
+  (count input))
+
+(defn wrap-around
+  "Handles the \"wrap-around\" for repeated rowitems, without actually duplicating the data."
+  [step row-items]
+  (mod step (count row-items)))
+
+(defn col-inc
+  "Slide right the appropriate amount."
+  [n]
+  (+ n right-amount))
+
+(defn row-inc
+  "Slide right the appropriate amount."
+  [n]
+  (+ n down-amount))
+
 ;; ------------------------------------------------------------------------------
 ;; BSD 3-Clause License
 
