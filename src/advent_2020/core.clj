@@ -1,6 +1,7 @@
-(ns advent-2020.core)
+(ns advent-2020.core
+  (:require [clojure.string :refer [split]]))
 
-(defn foo
-  "I don't do a whole lot."
-  [x]
-  (println x "Hello, World!"))
+(defn input
+  "Open the file name, in the tasks directory, read it in, and break into separate lines."
+  [file-name]
+  (->> file-name (str "tasks/") (slurp) (#(split % #"\n"))))
