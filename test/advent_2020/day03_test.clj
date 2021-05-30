@@ -47,3 +47,10 @@
       (is (= false (tree? 1 row-items)))  ; second open space
       (is (= false (tree? 12 row-items)))) ; second wrap-around open space
     ))
+
+(deftest forest-test
+  "Test the path through the tree/open space grid."
+  (testing
+      "Test data with a down 1, right 3 slope should encounter 7 trees"
+    (is (= 7 (tree-count test-data)))
+    (is (= 0 (tree-count [])))))

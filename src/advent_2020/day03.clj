@@ -19,6 +19,7 @@
 (def right-amount 3)
 (def down-amount 1)
 (def tree-char \#)
+(def input-file "day03.txt")
 
 (defn columns
   "How many \"openings\" and \"trees\" are in a given row of the input
@@ -50,6 +51,29 @@
   "Is the row item at `n' a tree?"
   [n row-items]
   (= tree-char (get row-items (wrap-around n row-items))))
+
+(defn tree-count
+  "Follow the slope through the forest grid, return the number of trees
+  encounterd on the trip top to bottom."
+  [forest]
+  (letfn
+      [
+       (-tree-count
+         [acc idx forest]
+         (cond
+           (empty? forest) acc
+           :else (let [head (first forest)
+                       tail (rest forest)
+                       spot-count (if (tree? idx head) 1 0)]
+                   (recur (+ acc spot-count) (col-inc idx) tail))))
+       ]
+    (-tree-count 0 0 forest)))
+
+(defn part1-count
+  ""
+  []
+  (tree-count (input input-file)))
+
 
 ;; ------------------------------------------------------------------------------
 ;; BSD 3-Clause License
