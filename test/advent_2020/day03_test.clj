@@ -51,6 +51,26 @@
 (deftest forest-test
   "Test the path through the tree/open space grid."
   (testing
-      "Test data with a down 1, right 3 slope should encounter 7 trees"
+      "Test data with a down 1, right 3 slope should encounter 7 trees."
     (is (= 7 (tree-count test-data row-inc col-inc)))
     (is (= 0 (tree-count [] row-inc col-inc)))))
+
+(deftest multi-slope-counts-test
+  "Test the multliple slopes from Part 2."
+  (testing
+      "The counts."
+    (is (= [2 7 3 4 2] (multiple-slope-counts test-data)))))
+
+(deftest multi-slope-product-test
+  "Test the multliple slopes from Part 2."
+  (testing
+      "The counts."
+    (is (= 336 (multiple-slope-product test-data)))))
+
+(deftest factory-test
+  "Testing the increment factory function."
+  (testing
+      "Plus 5 adder, with both 0 and 1 parameters."
+    (let [plus5 (increment-factory 5)]
+      (is (= 5 (plus5)))
+      (is (= 9 (plus5 4))))))

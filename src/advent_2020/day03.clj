@@ -21,6 +21,14 @@
 (def tree-char \#)
 (def input-file "day03.txt")
 
+;; Part 2 multiple slopes
+(def slopes [
+             {:right 1 :down 1}
+             {:right 3 :down 1}
+             {:right 5 :down 1}
+             {:right 7 :down 1}
+             {:right 1 :down 2}])
+
 (defn columns
   "How many \"openings\" and \"trees\" are in a given row of the input
   data. Assumes all the rows are the same size."
@@ -57,6 +65,15 @@
   [n row-items]
   (= tree-char (get row-items (wrap-around n row-items))))
 
+(defn increment-factory
+  "Generates a multiple arity function."
+  [amt]
+  (letfn [
+          (f
+            ([] amt)
+            ([n] (+ n amt)))]
+    f))
+
 (defn tree-count
   "Follow the slope through the forest grid, return the number of trees
   encounterd on the trip top to bottom."
@@ -74,10 +91,26 @@
        ]
     (-tree-count 0 0 forest)))
 
+(defn multiple-slope-counts
+  ""
+  [forest]
+  (for [slope slopes ]
+    (tree-count forest (increment-factory (:down slope)) (increment-factory (:right slope)))))
+
+(defn multiple-slope-product
+  ""
+  [forest]
+  (reduce * (multiple-slope-counts forest)))
+
 (defn part1-count
   ""
   []
   (tree-count (input input-file) row-inc col-inc))
+
+(defn part2-product
+  ""
+  []
+  (multiple-slope-product (input input-file)))
 
 
 ;; ------------------------------------------------------------------------------
