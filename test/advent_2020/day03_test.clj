@@ -52,5 +52,5 @@
   "Test the path through the tree/open space grid."
   (testing
       "Test data with a down 1, right 3 slope should encounter 7 trees"
-    (is (= 7 (tree-count test-data)))
-    (is (= 0 (tree-count [])))))
+    (is (= 7 (tree-count test-data row-inc col-inc)))
+    (is (= 0 (tree-count [] row-inc col-inc)))))

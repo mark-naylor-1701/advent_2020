@@ -16,8 +16,8 @@
                 "#...##....#"
                 ".#..#...#.#"])
 
-(def right-amount 3)
-(def down-amount 1)
+(def right-amount 3)                    ; Right step amount for Part 1.
+(def down-amount 1)                     ; Down step amount for Part 1.
 (def tree-char \#)
 (def input-file "day03.txt")
 
@@ -37,15 +37,20 @@
   [step row-items]
   (mod step (count row-items)))
 
+
+;; Function only used for Part 1.
 (defn col-inc
   "Slide right the appropriate amount."
   [n]
   (+ n right-amount))
 
+;; Function only used for Part 1.
 (defn row-inc
   "Slide right the appropriate amount."
-  [n]
-  (+ n down-amount))
+  ([]
+   down-amount)
+  ([n]
+   (+ n down-amount)))
 
 (defn tree?
   "Is the row item at `n' a tree?"
@@ -55,7 +60,7 @@
 (defn tree-count
   "Follow the slope through the forest grid, return the number of trees
   encounterd on the trip top to bottom."
-  [forest]
+  [forest row-inc col-inc]
   (letfn
       [
        (-tree-count
@@ -63,7 +68,7 @@
          (cond
            (empty? forest) acc
            :else (let [head (first forest)
-                       tail (rest forest)
+                       tail (drop (row-inc) forest)
                        spot-count (if (tree? idx head) 1 0)]
                    (recur (+ acc spot-count) (col-inc idx) tail))))
        ]
@@ -72,7 +77,7 @@
 (defn part1-count
   ""
   []
-  (tree-count (input input-file)))
+  (tree-count (input input-file) row-inc col-inc))
 
 
 ;; ------------------------------------------------------------------------------
