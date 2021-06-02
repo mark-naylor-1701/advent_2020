@@ -77,6 +77,10 @@
    "hcl:#cfa07d eyr:2025 pid:166559648"
    "iyr:2011 ecl:brn hgt:59in"])
 
+;; This data set and its companion test block is a bit redundant. It
+;; will also be included in the day06 branch. (Day 6 exercise is the
+;; source.) Better safe to make sure the set works within the day06
+;; namespace.
 (def question-test-data
   "Raw question response lines."
   ["abc"
