@@ -4,18 +4,6 @@
 (ns advent-2020.day03
   (:require [advent-2020.core :refer [input] ]))
 
-(def test-data ["..##......."
-                "#...#...#.."
-                ".#....#..#."
-                "..#.#...#.#"
-                ".#...##..#."
-                "..#.##....."
-                ".#.#.#....#"
-                ".#........#"
-                "#.##...#..."
-                "#...##....#"
-                ".#..#...#.#"])
-
 (def right-amount 3)                    ; Right step amount for Part 1.
 (def down-amount 1)                     ; Down step amount for Part 1.
 (def tree-char \#)
