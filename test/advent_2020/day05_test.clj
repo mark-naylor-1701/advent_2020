@@ -1,6 +1,7 @@
 (ns advent-2020.day05-test
   (:require [clojure.test :refer :all]
-            [advent-2020.day05 :refer :all]))
+            [advent-2020.day05 :refer :all]
+            [advent-2020.test-support :refer [fmt]]))
 
 (def test-data [["BFFFBBFRRR" "1000110111" 567]
                 ["FFFBBBFRRR" "0001110111" 119]
@@ -23,7 +24,6 @@
   (let [expected 820
         actual (largest-seat-code (map decimal test-data))]
 
-
     (testing
         "Seat code to binary string."
       (is (= (map binary test-data) (map #(-> % code binary-code) test-data)) ))
@@ -39,4 +39,4 @@
     (testing
         "Find the largest seat code, as a decimal value."
       (is (= expected actual)
-          (str "Largest seat. expected: " expected " actual: " actual)))))
+          (fmt "Largest seat" expected actual)))))
