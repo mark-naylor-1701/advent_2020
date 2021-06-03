@@ -8,10 +8,6 @@
 
 (def input-file "day05.txt")
 
-(def test-data [["BFFFBBFRRR" "1000110111" 567]
-                ["FFFBBBFRRR" "0001110111" 119]
-                ["BBFFBBFRLL" "1100110100" 820]])
-
 (defn binary-code
   "Converts the seat code to a binary string."
   [seat-code]

@@ -2,6 +2,10 @@
   (:require [clojure.test :refer :all]
             [advent-2020.day05 :refer :all]))
 
+(def test-data [["BFFFBBFRRR" "1000110111" 567]
+                ["FFFBBBFRRR" "0001110111" 119]
+                ["BBFFBBFRLL" "1100110100" 820]])
+
 (defn code
   [coll]
   (first coll))
@@ -16,18 +20,23 @@
 
 (deftest seat-decode-test
   "Testing conversion of seat to binary string, and then to decimal."
-  (testing
-      "Seat code to binary string."
-    (is (= (map binary test-data) (map #(-> % code binary-code) test-data)) ))
+  (let [expected 820
+        actual (largest-seat-code (map decimal test-data))]
 
-  (testing
-      "Binary string to integer"
-    (is (= (map decimal test-data) (map #(-> % binary binary-str->int) test-data))))
 
-  (testing
-      "Seat code to decimal value."
-    (is (= (map decimal test-data) (map #(-> % binary seat-code->int) test-data))))
+    (testing
+        "Seat code to binary string."
+      (is (= (map binary test-data) (map #(-> % code binary-code) test-data)) ))
 
-  (testing
-      "Find the largest seat code, as a decimal value."
-    (is (= 820 (largest-seat-code (map binary test-data))))))
+    (testing
+        "Binary string to integer"
+      (is (= (map decimal test-data) (map #(-> % binary binary-str->int) test-data))))
+
+    (testing
+        "Seat code to decimal value."
+      (is (= (map decimal test-data) (map #(-> % binary seat-code->int) test-data))))
+
+    (testing
+        "Find the largest seat code, as a decimal value."
+      (is (= expected actual)
+          (str "Largest seat. expected: " expected " actual: " actual)))))
