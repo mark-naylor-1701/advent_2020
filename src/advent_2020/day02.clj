@@ -6,9 +6,6 @@
             [advent-2020.core :refer [input]]))
 
 (def file-name "day02.txt")
-(def test-data ["1-3 a: abcde"
-                "1-3 b: cdefg"
-                "2-9 c: ccccccccc"])
 
 (defn xor
   "Returns true if one true and one false. false otherwise."
