@@ -1,5 +1,6 @@
 (ns advent-2020.day06-test
   (:require [clojure.test :refer :all]
+            [advent-2020.test-support :refer [fmt]]
             [advent-2020.day06 :refer :all]
             [advent-2020.core :refer [group-lines]]
             [clojure.string :refer [join]]))
@@ -21,15 +22,6 @@
    "a" "a" "a" "a"
    ""
    "b"])
-
-(defn fmt
-  [prefix expected actual]
-  (str prefix
-       " should be "
-       expected
-       ", not "
-       (if-not (nil? actual) actual "<nil>")
-       "."))
 
 (deftest group-uniques-count-test
   "Validate the count for the first (single) group sample."
